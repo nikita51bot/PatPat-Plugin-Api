@@ -1,0 +1,56 @@
+plugins {
+	id 'java'
+}
+
+group = 'ru.nikita51.patpat.plugin.api'
+version = '1.0.0'
+
+base {
+	archivesName = "patpat-plugin-api"
+}
+
+def buildJavaString = prop("java-version")
+def buildJava = JavaVersion.toVersion(buildJavaString)
+
+repositories {
+	mavenCentral()
+	maven {
+		name = "spigotmc-repo"
+		url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+	}
+}
+
+java {
+	withSourcesJar()
+	withJavadocJar()
+
+	sourceCompatibility = buildJava
+	targetCompatibility = buildJava
+	if (JavaVersion.current() < buildJava) {
+		toolchain.languageVersion = JavaLanguageVersion.of(buildJavaString)
+	}
+}
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = 'UTF-8'
+	options.release = buildJavaString as int
+}
+
+dependencies {
+	// Spigot API
+	compileOnly("org.spigotmc:spigot-api:${prop("spigot-api")}")
+
+	// Jetbrains Annotations
+	compileOnly("org.jetbrains:annotations:${prop("jetbrains-annotations")}")
+}
+
+
+tasks.withType(Javadoc).configureEach {
+	options.docTitle = "PatPat Plugin API "+version
+	options.windowTitle = options.docTitle
+}
+
+
+
+String prop(String key) {
+	return findProperty(key).toString()
+}
