@@ -1,7 +1,5 @@
 # PatPat Plugin API
 
-----------------------------------
-
 A public API for the PatPat Plugin, designed for use in third‑party plugins (Bukkit, Spigot, Paper, etc.) to interact with PatPat’s features.
 
 ## Features

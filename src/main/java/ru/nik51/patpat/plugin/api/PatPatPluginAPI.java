@@ -1,4 +1,4 @@
-package ru.nikita51.patpat.plugin.api;
+package ru.nik51.patpat.plugin.api;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

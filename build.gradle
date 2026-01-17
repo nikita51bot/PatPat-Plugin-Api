@@ -1,8 +1,9 @@
 plugins {
 	id 'java'
+	id "com.vanniktech.maven.publish" version "0.35.0"
 }
 
-group = 'ru.nikita51.patpat.plugin.api'
+group = 'ru.nik51'
 version = '1.0.0'
 
 base {
@@ -21,9 +22,6 @@ repositories {
 }
 
 java {
-	withSourcesJar()
-	withJavadocJar()
-
 	sourceCompatibility = buildJava
 	targetCompatibility = buildJava
 	if (JavaVersion.current() < buildJava) {
@@ -50,6 +48,41 @@ tasks.withType(Javadoc).configureEach {
 }
 
 
+mavenPublishing {
+	coordinates(group.toString(), "patpat-plugin-api", version.toString())
+
+	pom {
+		name = "PatPat Plugin Api"
+		description = "Public API for PatPat Plugin."
+		inceptionYear = "2026"
+		url = "https://github.com/nikita51bot/PatPat-Plugin-Api"
+		licenses {
+			license {
+				name = "GNU Lesser General Public License v3.0"
+				url = "https://www.gnu.org/licenses/lgpl-3.0.en.html"
+				distribution = "https://www.gnu.org/licenses/lgpl-3.0.en.html"
+			}
+		}
+		developers {
+			developer {
+				id = "nikita51bot"
+				name = "Nikita"
+				url = "https://github.com/nikita51bot/"
+			}
+		}
+		scm {
+			url = "https://github.com/nikita51bot/PatPat-Plugin-Api"
+			connection = "scm:git:git://github.com/nikita51bot/PatPat-Plugin-Api.git"
+			developerConnection = "scm:git:ssh://git@github.com/nikita51bot/PatPat-Plugin-Api.git"
+		}
+	}
+}
+
+afterEvaluate {
+	tasks.named("generateMetadataFileForMavenPublication") {
+		dependsOn tasks.named("plainJavadocJar")
+	}
+}
 
 String prop(String key) {
 	return findProperty(key).toString()
