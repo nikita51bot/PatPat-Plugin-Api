@@ -1,3 +1,5 @@
+[![Maven Central Version](https://img.shields.io/maven-central/v/ru.nik51/patpat-plugin-api)](https://central.sonatype.com/artifact/ru.nik51/patpat-plugin-api)
+
 # PatPat Plugin API
 
 A public API for the PatPat Plugin, designed for use in third‑party plugins (Bukkit, Spigot, Paper, etc.) to interact with PatPat’s features.
