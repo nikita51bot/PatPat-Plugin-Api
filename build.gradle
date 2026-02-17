@@ -1,23 +1,23 @@
 plugins {
 	id 'java'
-	id "com.vanniktech.maven.publish" version "0.35.0"
+	id 'com.vanniktech.maven.publish' version '0.35.0'
 }
 
 group = 'ru.nik51'
-version = '1.0.0'
+version = prop('patpat-plugin-api')
 
 base {
-	archivesName = "patpat-plugin-api"
+	archivesName = 'patpat-plugin-api'
 }
 
-def buildJavaString = prop("java-version")
+def buildJavaString = prop('java-version')
 def buildJava = JavaVersion.toVersion(buildJavaString)
 
 repositories {
 	mavenCentral()
 	maven {
-		name = "spigotmc-repo"
-		url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+		name = 'spigotmc-repo'
+		url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
 	}
 }
 
@@ -35,52 +35,52 @@ tasks.withType(JavaCompile).configureEach {
 
 dependencies {
 	// Spigot API
-	compileOnly("org.spigotmc:spigot-api:${prop("spigot-api")}")
+	compileOnly("org.spigotmc:spigot-api:${prop('spigot-api')}")
 
 	// Jetbrains Annotations
-	compileOnly("org.jetbrains:annotations:${prop("jetbrains-annotations")}")
+	compileOnly("org.jetbrains:annotations:${prop('jetbrains-annotations')}")
 }
 
 
 tasks.withType(Javadoc).configureEach {
-	options.docTitle = "PatPat Plugin API "+version
+	options.docTitle = 'PatPat Plugin API '+version
 	options.windowTitle = options.docTitle
 }
 
 
 mavenPublishing {
-	coordinates(group.toString(), "patpat-plugin-api", version.toString())
+	coordinates(group.toString(), 'patpat-plugin-api', version.toString())
 
 	pom {
-		name = "PatPat Plugin Api"
-		description = "Public API for PatPat Plugin."
-		inceptionYear = "2026"
-		url = "https://github.com/nikita51bot/PatPat-Plugin-Api"
+		name = 'PatPat Plugin Api'
+		description = 'Public API for PatPat Plugin.'
+		inceptionYear = '2026'
+		url = 'https://github.com/nikita51bot/PatPat-Plugin-Api'
 		licenses {
 			license {
-				name = "GNU Lesser General Public License v3.0"
-				url = "https://www.gnu.org/licenses/lgpl-3.0.en.html"
-				distribution = "https://www.gnu.org/licenses/lgpl-3.0.en.html"
+				name = 'GNU Lesser General Public License v3.0'
+				url = 'https://www.gnu.org/licenses/lgpl-3.0.en.html'
+				distribution = 'https://www.gnu.org/licenses/lgpl-3.0.en.html'
 			}
 		}
 		developers {
 			developer {
-				id = "nikita51bot"
-				name = "Nikita"
-				url = "https://github.com/nikita51bot/"
+				id = 'nikita51bot'
+				name = 'Nikita'
+				url = 'https://github.com/nikita51bot/'
 			}
 		}
 		scm {
-			url = "https://github.com/nikita51bot/PatPat-Plugin-Api"
-			connection = "scm:git:git://github.com/nikita51bot/PatPat-Plugin-Api.git"
-			developerConnection = "scm:git:ssh://git@github.com/nikita51bot/PatPat-Plugin-Api.git"
+			url = 'https://github.com/nikita51bot/PatPat-Plugin-Api'
+			connection = 'scm:git:git://github.com/nikita51bot/PatPat-Plugin-Api.git'
+			developerConnection = 'scm:git:ssh://git@github.com/nikita51bot/PatPat-Plugin-Api.git'
 		}
 	}
 }
 
 afterEvaluate {
-	tasks.named("generateMetadataFileForMavenPublication") {
-		dependsOn tasks.named("plainJavadocJar")
+	tasks.named('generateMetadataFileForMavenPublication') {
+		dependsOn tasks.named('plainJavadocJar')
 	}
 }
 
