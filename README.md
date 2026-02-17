@@ -14,3 +14,6 @@ Currently, the API provides a limited but useful set of functionality. At the mo
 ## Documentation
 - Javadoc: (coming soon)
 - Docs: (coming soon)
+
+## Examples
+- [PatPatTameFriend](https://github.com/nikita51bot/PatPatTameFriend)
